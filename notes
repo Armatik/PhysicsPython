@@ -1,0 +1,35 @@
+    # ts находится между -10 ~ 10:
+
+    # TheSameDirection()
+    # TheSameDirection(theta2=2*pi)
+    # TheSameDirection(theta2=0.6*pi)
+
+
+
+    # ts составляет от -50 до 50:
+
+    TheSameDirection(w1=4, w2=4.1)
+
+# TheDifferentDirection()
+# TheDifferentDirection(theta2=2*pi)
+# TheDifferentDirection(theta2=0.6*pi)
+# TheDifferentDirection(theta2=3.6*pi)
+
+# TheDifferentDirection(w1=2,w2=5)
+# TheDifferentDirection(w1=3,w2=7)
+# TheDifferentDirection(w1=2,w2=11)
+# TheDifferentDirection(w1=7,w2=3)
+
+
+    y1, y2 = [], []
+    for t in ts:
+        y1.append(A1 * cos(w1 * t + theta1))
+        y2.append(A2 * cos(w2 * t + theta2))
+
+    plt.figure()
+    plt.plot(ts, y1, alpha=0.5, c='deeppink')
+    plt.plot(ts, y2, alpha=0.5, c='blue')
+    for i in range(len(y1)):
+        y.append(y1[i] + y2[i])
+    plt.plot(ts, y, c='red', alpha=5)
+    plt.show()
