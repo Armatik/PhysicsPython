@@ -1,17 +1,16 @@
-from math import pi, cos
+from math import pi, cos, sin
 import matplotlib.pyplot as plt
 import numpy as np
-import asyncore
 
 ts = np.linspace(-300, 300, 100000)
 
 
-def TheSameDirection(A1=5, A2=8, w1=1.2, w2=1.2, theta1=pi, theta2=3 * pi):
+def TheSameDirection(A1=5, A2=8, f1=1.2, f2=1.2, theta1=pi, theta2=3 * pi):
 
     y1, y2 = [], []
     for t in ts:
-        y1.append(A1 * cos(w1 * t + theta1))
-        y2.append(A2 * cos(w2 * t + theta2))
+        y1.append(A1 * cos(f1 * t + theta1))
+        y2.append(A2 * cos(f2 * t + theta2))
 
     fig = plt.figure()
     #fig.set_figheight(3)
@@ -27,11 +26,11 @@ def TheSameDirection(A1=5, A2=8, w1=1.2, w2=1.2, theta1=pi, theta2=3 * pi):
     plt.show()
 
 
-def TheDifferentDirection(A1=5, A2=8, w1=1.2, w2=1.2, theta1=pi, theta2=3 * pi, xlim=[-20, 20], ylim=[-20, 20]):
+def TheDifferentDirection(A1=5, A2=8, f1=1.2, f2=1.2, theta1=pi, theta2=3 * pi, xlim=[-20, 20], ylim=[-20, 20]):
     x, y = [], []
     for t in ts:
-        x.append(A1 * cos(w1 * t + theta1))
-        y.append(A2 * cos(w2 * t + theta2))
+        x.append(A1 * cos(f1 * t + theta1))
+        y.append(A2 * sin(f2 * t + theta2))
 
     fig = plt.figure()
     fig.set_figheight(10)
@@ -41,35 +40,27 @@ def TheDifferentDirection(A1=5, A2=8, w1=1.2, w2=1.2, theta1=pi, theta2=3 * pi, 
     plt.plot(x, y)
     plt.show()
 
-#многопоточная работа функции thesomedirection
-
-
-
 if __name__ == '__main__':
     #Биение:
-    TheSameDirection(w1=4, w2=4.1)
+    TheSameDirection(f1=4, f2=4.1)
     # Прямая линия:
-    TheDifferentDirection(theta2=2*pi)
+    TheDifferentDirection(f1=10, f2=10, xlim=[-2, 2], ylim=[-2, 2], A1=1, A2=1, theta1=1.5*pi, theta2=pi)
+    # Отзеркаленая прямая линия:
+    TheDifferentDirection(f1=10, f2=10, xlim=[-2, 2], ylim=[-2, 2], A1=1, A2=1, theta1=pi, theta2=1.5*pi)
     # Окружности 3х разных размеров:
-    TheDifferentDirection(theta2=1.5*pi, w1=2, w2=2, A1=5, A2=5, theta1=1*pi)
+    TheDifferentDirection(f1=10, f2=10, xlim=[-2, 2], ylim=[-2, 2], A1=0.5, A2=0.5, theta1=pi, theta2=pi)
 
-    TheDifferentDirection(theta2=1.5 * pi, w1=2, w2=2, A1=10, A2=10, theta1=1 * pi)
+    TheDifferentDirection(f1=10, f2=10, xlim=[-2, 2], ylim=[-2, 2], A1=1, A2=1, theta1=pi, theta2=pi)
 
-    TheDifferentDirection(theta2=1.5 * pi, w1=2, w2=2, A1=15, A2=15, theta1=1 * pi)
-    # Разные частоты и фазы:
-    TheDifferentDirection(w1=2,w2=5, xlim=[-10, 10], ylim=[-10, 10])
-    # Разные частоты и амплитуды:
-    TheDifferentDirection(w1=3,w2=7, xlim=[-10, 10], ylim=[-10, 10])
-    # Разные фазы и амплитуды:
-    TheDifferentDirection(w1=2,w2=11, xlim=[-10, 10], ylim=[-10, 10])
-    # Разные частоты, фазы и амплитуды:
-    TheDifferentDirection(w1=7,w2=3, xlim=[-10, 10], ylim=[-10, 10])
+    TheDifferentDirection(f1=10, f2=10, xlim=[-2, 2], ylim=[-2, 2], A1=1.5, A2=1.5, theta1=pi, theta2=pi)
 
 
-    #Набор:
-    # Колебания:
-    # TheSameDirection(w1=1.2, w2=1.2)
-    # Резонанс:
-    # TheSameDirection(w1=1.2, w2=1.2, A1=5, A2=5)
-    # Разные направления:
-    # TheDifferentDirection()
+    # рис 6
+    TheDifferentDirection(f1=30, f2=20, xlim=[-2, 2], ylim=[-2, 2], A1=1, A2=1, theta1=pi, theta2=pi)
+    # Рис 7
+    TheDifferentDirection(f1=40, f2=20, xlim=[-2, 2], ylim=[-2, 2], A1=1, A2=1, theta1=0.5 * pi, theta2=pi)
+    # Рис 8:
+    TheDifferentDirection(f1=60, f2=20, xlim=[-2, 2], ylim=[-2, 2], A1=1, A2=1, theta1=0.5 * pi, theta2=pi)
+    # Рис 9:
+    TheDifferentDirection(f1=20, f2=30, xlim=[-2, 2], ylim=[-2, 2], A1=1, A2=1, theta1=0.5 * pi, theta2=pi)
+
